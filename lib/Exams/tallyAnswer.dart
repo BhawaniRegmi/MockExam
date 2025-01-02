@@ -395,7 +395,7 @@ class TallyAnswerScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
+                  const Center(
                     child: Text(
                       'Your Result Code: ABC123XYZ',
                       style: TextStyle(
@@ -509,7 +509,7 @@ class TallyAnswerScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(width: 60,),
+          const SizedBox(width: 60,),
           Text(
             label,
             style: const TextStyle(
@@ -526,7 +526,7 @@ class TallyAnswerScreen extends StatelessWidget {
               color: Colors.deepPurple,
             ),
           ),
-          SizedBox(width: 50,),
+          const SizedBox(width: 50,),
         ],
       ),
     );

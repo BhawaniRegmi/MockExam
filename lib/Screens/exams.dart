@@ -212,6 +212,16 @@ class _ExamSearchScreenState extends State<ExamSearchScreen> {
     'PTE',
     'TOEFL',
   ];
+    final List<String> paths = [
+      'ielts.png',
+    'lokSewa.jpeg',
+    'gre.png',
+    'korean.png',
+    'ielts.png',
+    'gre.png',
+    'korean.png',
+   
+  ];
 
   // Define actions for each exam
   final Map<String, VoidCallback> examActions = {};
@@ -227,7 +237,7 @@ class _ExamSearchScreenState extends State<ExamSearchScreen> {
     // Initialize exam actions
     examActions.addAll({
       'IELTS': () => _navigateToDetails('IELTS Exam Details'),
-      'LokSewa': () => Navigator.push(context, MaterialPageRoute(builder: (context) => LokSewaApp())),
+      'LokSewa': () => Navigator.push(context, MaterialPageRoute(builder: (context) => LokSewaExamScreen())),
       'GRE': () => _navigateToDetails('GRE Preparation Guide'),
       'GMAT': () => _navigateToDetails('GMAT Tips and Tricks'),
       'Bridge Course': () => _navigateToDetails('Bridge Course Details'),
@@ -379,64 +389,83 @@ class _ExamSearchScreenState extends State<ExamSearchScreen> {
                   ? GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 3 / 2,
+                       childAspectRatio: .91,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
                       ),
                       itemCount: filteredExams.length,
                       itemBuilder: (context, index) {
                         final exam = filteredExams[index];
+                        final path = paths[exams.indexOf(exam)];
                         return Card(
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
+                              elevation: 4,
+                              child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // Add image
+                                Image.asset(
+                                'assets/auth/$path',
+                                height: 80,
+                                width: 100,
+                                fit: BoxFit.cover,
+                                ),
+                                SizedBox(height: 4),
+                                Text(
                                 exam,
                                 style: TextStyle(fontSize: 16),
-                              ),
-                              SizedBox(height: 8),
-                              ElevatedButton(
+                                ),
+                               // SizedBox(height: 2),
+                                ElevatedButton(
                                 onPressed: examActions[exam],
                                 child: Text('Get Started'),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.purple,
                                 ),
+                                ),
+                              ],
                               ),
-                            ],
-                          ),
-                        );
+                            );
                       },
                     )
                   : exams.isNotEmpty
                       ? GridView.builder(
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            childAspectRatio: 3 / 2,
+                            // childAspectRatio: 3 / 2,
+                            childAspectRatio: .91,
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
                           ),
                           itemCount: exams.length,
                           itemBuilder: (context, index) {
                             final exam = exams[index];
+                            final path = paths[index];
                             return Card(
                               elevation: 4,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    exam,
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                  SizedBox(height: 8),
-                                  ElevatedButton(
-                                    onPressed: examActions[exam],
-                                    child: Text('Get Started'),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.purple,
-                                    ),
-                                  ),
-                                ],
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // Add image
+                                Image.asset(
+                                'assets/auth/$path',
+                                height: 80,
+                                width: 90,
+                                fit: BoxFit.cover,
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                exam,
+                                style: TextStyle(fontSize: 16),
+                                ),
+                               // SizedBox(height: 2),
+                                ElevatedButton(
+                                onPressed: examActions[exam],
+                                child: Text('Get Started'),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.purple,
+                                ),
+                                ),
+                              ],
                               ),
                             );
                           },

@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mock_exam/Analytics/analytics.dart';
 import 'package:mock_exam/Screens/courseSearchScreen.dart';
 import 'package:mock_exam/Screens/exams.dart';
+import 'package:mock_exam/Screens/profileScreen.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     ExamSearchScreen(),
     AnalyticsScreen(),
     CourseSearchScreen(),
-    ProfileScreen(),
+    ProfileApp(),
   ];
 
   @override
@@ -276,6 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     _buildExamCategory("IELTS", "assets/auth/ielts.png", size),
                     _buildExamCategory("Korean", "assets/auth/korean.png", size),
                     _buildExamCategory("LokSewa", "assets/auth/lokSewa.jpeg", size),
+                     _buildExamCategory("Gre", "assets/auth/gre.png", size),
                   ],
                 ),
               ),
@@ -373,7 +376,7 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: EdgeInsets.all(size.width * 0.02),
       child: Column(
         children: [
-          Image.asset(imagePath, width: size.width * 0.25, height: size.width * 0.2, fit: BoxFit.cover),
+          Image.asset(imagePath, width:90, height: 80, fit: BoxFit.cover),
           SizedBox(height: size.height * 0.01),
           Text(title, style: TextStyle(fontSize: size.width * 0.04)),
         ],
@@ -445,26 +448,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class TestScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text("Tests Screen"));
-  }
-}
 
-class AnalyticsScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text("Analytics Screen"));
-  }
-}
 
-class CoursesScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text("Courses Screen"));
-  }
-}
+
+
+
 
 class ProfileScreen extends StatelessWidget {
   @override
