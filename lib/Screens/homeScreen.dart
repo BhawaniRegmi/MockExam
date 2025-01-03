@@ -7,6 +7,8 @@ import 'package:mock_exam/Screens/courseSearchScreen.dart';
 import 'package:mock_exam/Screens/exams.dart';
 import 'package:mock_exam/Screens/profileScreen.dart';
 
+import '../ReUseableWidget/drawer.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -92,15 +94,20 @@ class _HomeScreenState extends State<HomeScreen> {
     final padding = size.width * 0.05;
 
     return Scaffold(
+      
       appBar: AppBar(
+      
+            leading: Builder(
+              builder: (context) => IconButton(
+                icon: Icon(Icons.menu, color: Colors.black),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              ),
+            ),
         title: Center(child: const Text('Mock Exam', style: TextStyle(color: Colors.black))),
         backgroundColor: Colors.white,
-        leading: IconButton(
-            icon: Icon(Icons.menu, color: Colors.black),
-            onPressed: () {
-              // Notification action
-            },
-          ),
+       
         actions: [
           IconButton(
             icon: Icon(Icons.notifications, color: Colors.black),
@@ -110,11 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          // Add your drawer items here
-        ),
-      ),
+     drawer: MenuDrawer(),
 
 
 

@@ -345,6 +345,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TallyAnswerScreen extends StatelessWidget {
   final int totalQuestions = 4;
@@ -375,130 +376,153 @@ class TallyAnswerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tally Answers', style: TextStyle(color: Colors.black)),
-        backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(color: Colors.black),
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-        Navigator.pop(context);
-          },
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Tally Answers', style: TextStyle(color: Colors.black)),
+          backgroundColor: Colors.white,
+          iconTheme: const IconThemeData(color: Colors.black),
+          leading: IconButton(
+            icon: const Icon(Icons.home),
+            onPressed: () {
+              Navigator.of(context).popUntil((route) => route.isFirst);
+            },
+          ),
         ),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Center(
-                    child: Text(
-                      'Your Result Code: ABC123XYZ',
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.deepPurple,
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Center(
+                      child: Text(
+                        'Your Result Code: ABC123XYZ',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.deepPurple,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  buildSummaryRow('Total   Questions:', totalQuestions.toString()),
-                  buildSummaryRow('Correct Answers:', correctAnswers.toString()),
-                  buildSummaryRow('Wrong   Answers:', wrongAnswers.toString()),
-                  const SizedBox(height: 3),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: questions.length,
-                    itemBuilder: (context, index) {
-                      final question = questions[index];
-                      final isCorrect =
-                          question['correctAnswer'] == question['selectedAnswer'];
+                    const SizedBox(height: 10),
+                    buildSummaryRow('Total   Questions:', totalQuestions.toString()),
+                    buildSummaryRow('Correct Answers:', correctAnswers.toString()),
+                    buildSummaryRow('Wrong   Answers:', wrongAnswers.toString()),
+                    const SizedBox(height: 3),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: questions.length,
+                      itemBuilder: (context, index) {
+                        final question = questions[index];
+                        final isCorrect =
+                            question['correctAnswer'] == question['selectedAnswer'];
 
-                      return Card(
-                        elevation: 4,
-                        margin: const EdgeInsets.symmetric(vertical: 8),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
+                          return Card(
+                          elevation: 4,
+                          margin: const EdgeInsets.symmetric(vertical: 8),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                question['question']!,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              question['question']!,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                               ),
                               const SizedBox(height: 8),
                               Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
                                 children: [
                                   const Text('Your Answer: '),
                                   Text(
-                                    question['selectedAnswer']!,
-                                    style: TextStyle(
-                                      color: isCorrect ? Colors.green : Colors.red,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Icon(
-                                    isCorrect ? Icons.check_circle : Icons.cancel,
+                                  question['selectedAnswer']!,
+                                  style: TextStyle(
                                     color: isCorrect ? Colors.green : Colors.red,
                                   ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  const Text('Correct Answer: '),
-                                  Text(
-                                    question['correctAnswer']!,
-                                    style: const TextStyle(color: Colors.green),
                                   ),
                                 ],
+                                ),
+                                Icon(
+                                isCorrect ? Icons.check_circle : Icons.cancel,
+                                color: isCorrect ? Colors.green : Colors.red,
+                                ),
+                              ],
+                              ),
+                              Row(
+                              children: [
+                                const Text('Correct Answer: '),
+                                Text(
+                                question['correctAnswer']!,
+                                style: const TextStyle(color: Colors.green),
+                                ),
+                              ],
                               ),
                             ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                          );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {
-                  Share.share(
-                      'I scored $correctAnswers out of $totalQuestions in the Mock Exam!');
-                },
-                icon: const Icon(Icons.share),
-                label: const Text('Share Result'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () async {
+                  final Uri emailLaunchUri = Uri(
+                    scheme: 'mailto',
+                    path: '',
+                    query: 'subject=Mock Exam Results&body=I scored $correctAnswers out of $totalQuestions in the Mock Exam!',
+                  );
+                  if (await canLaunchUrl(emailLaunchUri)) {
+                    if (await canLaunch(emailLaunchUri.toString())) {
+                      await launch(emailLaunchUri.toString());
+                    } else {
+                      // Handle the error when the email app is not available
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Could not launch email app')),
+                      );
+                    }
+                  }
+                  },
+                  icon: const Icon(Icons.email),
+                  label: const Text('Share Result'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                  ),
                 ),
-              ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  // Export functionality goes here
-                },
-                icon: const Icon(Icons.download),
-                label: const Text('Export Result'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
+                ElevatedButton.icon(
+                  onPressed: () {
+                    // Export functionality goes here
+                  },
+                  icon: const Icon(Icons.download),
+                  label: const Text('Export Result'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-        ],
+              ],
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }

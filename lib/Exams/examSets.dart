@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mock_exam/Exams/examPaper.dart';
+import 'package:mock_exam/Exams/tallyAnswer.dart';
 
 
 
@@ -43,6 +44,33 @@ class _ExamScreenState extends State<ExamScreen> {
           .toList();
       suggestions = [];
     });
+  }
+
+void showSubmitDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Congratulations!'),
+        content: const Text('Your paper is submitted.'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+
+            },
+            child: const Text('Go To Home'),
+          ),
+          TextButton(
+            onPressed: () {
+             // tallyAnswers();
+             Navigator.push(context, MaterialPageRoute(builder: (context) => TallyAnswerScreen()));
+            },
+            child: const Text('Tally Answers'),
+          ),
+        ],
+      ),
+    );
   }
 
   void _clearSearch() {
@@ -147,15 +175,39 @@ class _ExamScreenState extends State<ExamScreen> {
                       title: Text(set),
                       subtitle: Text(
                           '${index % 2 == 0 ? 18 : 20} Questions  ·  ${index % 2 == 0 ? 10 : 15} minutes'),
-                      trailing: ElevatedButton(
+                        trailing: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder:  (context) => MockExamScreen()));
+                          showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Start Exam'),
+                            content: const Text('Are you sure you want to start the exam?'),
+                            actions: [
+                            TextButton(
+                              onPressed: () {
+                              Navigator.of(context).pop();
+                              },
+                              child: const Text('No'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                              Navigator.of(context).pop();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => MockExamScreen()),
+                              );
+                              },
+                              child: const Text('Yes'),
+                            ),
+                            ],
+                          ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.deepPurple,
                         ),
                         child: const Text('Start Exam'),
-                      ),
+                        ),
                     ),
                   );
                 },

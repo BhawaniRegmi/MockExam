@@ -237,7 +237,7 @@ class _ExamSearchScreenState extends State<ExamSearchScreen> {
     // Initialize exam actions
     examActions.addAll({
       'IELTS': () => _navigateToDetails('IELTS Exam Details'),
-      'LokSewa': () => Navigator.push(context, MaterialPageRoute(builder: (context) => LokSewaExamScreen())),
+      'LokSewa': () => Navigator.push(context, MaterialPageRoute(builder: (context) => LokSewaScreen())),
       'GRE': () => _navigateToDetails('GRE Preparation Guide'),
       'GMAT': () => _navigateToDetails('GMAT Tips and Tricks'),
       'Bridge Course': () => _navigateToDetails('Bridge Course Details'),

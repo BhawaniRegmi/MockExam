@@ -148,48 +148,59 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:mock_exam/Exams/examSets.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: LokSewaExamScreen(),
-  ));
-}
 
-class LokSewaExamScreen extends StatefulWidget {
+
+class LokSewaScreen extends StatefulWidget {
   @override
-  _LokSewaExamScreenState createState() => _LokSewaExamScreenState();
+  _LokSewaScreenState createState() => _LokSewaScreenState();
 }
 
-class _LokSewaExamScreenState extends State<LokSewaExamScreen> {
+class _LokSewaScreenState extends State<LokSewaScreen> {
   final TextEditingController _searchController = TextEditingController();
-  final List<String> _categories = ['Adhikrit', 'Subba', 'Kharidar'];
-  List<String> _filteredCategories = [];
-  String? _selectedSuggestion;
+  List<String> allItems = ['Adhikrit', 'Subba', 'Kharidar'];
+  List<String> filteredItems = [];
+  List<String> suggestions = [];
 
   @override
   void initState() {
     super.initState();
-    _filteredCategories = _categories;
+    _searchController.addListener(() {
+      _filterSuggestions(_searchController.text);
+    });
   }
 
-  void _filterCategories(String query) {
-    setState(() {
-      if (query.isEmpty) {
-        _filteredCategories = _categories;
-        _selectedSuggestion = null;
-      } else {
-        _filteredCategories = _categories
-            .where((category) => category.toLowerCase().contains(query.toLowerCase()))
+  void _filterSuggestions(String query) {
+    if (query.isEmpty) {
+      setState(() {
+        suggestions.clear();
+        filteredItems.clear();
+      });
+    } else {
+      setState(() {
+        suggestions = allItems
+            .where((item) => item.toLowerCase().contains(query.toLowerCase()))
             .toList();
-      }
+      });
+    }
+  }
+
+  void _filterList(String selectedSuggestion) {
+    setState(() {
+      filteredItems = allItems
+          .where((item) =>
+              item.toLowerCase() == selectedSuggestion.toLowerCase())
+          .toList();
+      suggestions.clear();
     });
   }
 
   void _clearSearch() {
     setState(() {
       _searchController.clear();
-      _filteredCategories = _categories;
-      _selectedSuggestion = null;
+      filteredItems.clear();
+      suggestions.clear();
     });
   }
 
@@ -197,73 +208,187 @@ class _LokSewaExamScreenState extends State<LokSewaExamScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('LokSewa Exams'),
+        title: const Text('LokSewa Exams', style: TextStyle(color: Colors.black)),
+        backgroundColor: Colors.white,
+        leading: const Icon(Icons.home, color: Colors.black),
+        actions: [
+          IconButton(
+        icon: const Icon(Icons.notifications, color: Colors.black),
+        onPressed: () {},
+          ),
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+      body: Column(
+        children: [
+            Padding(
+              // padding: const EdgeInsets.all(16.0),
+               padding: const EdgeInsets.fromLTRB(16, 10, 16, 8),
+              child: Row(
               children: [
                 Expanded(
+                child: SizedBox(
+                  height: 50,
                   child: TextField(
-                    controller: _searchController,
-                    decoration: InputDecoration(
-                      hintText: 'Search LokSewa exams...',
-                      suffixIcon: _searchController.text.isNotEmpty
-                          ? IconButton(
-                              icon: Icon(Icons.clear),
-                              onPressed: _clearSearch,
-                            )
-                          : null,
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    hintText: 'Search LokSewa exams...',
+                    prefixIcon: const Icon(Icons.search),
+                    suffixIcon: _searchController.text.isNotEmpty
+                      ? IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: _clearSearch,
+                      )
+                      : null,
+                    border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
                     ),
-                    onChanged: _filterCategories,
+                  ),
                   ),
                 ),
+                ),
               ],
+              ),
             ),
-            if (_searchController.text.isNotEmpty)
-              Wrap(
-                spacing: 8.0,
-                children: _filteredCategories
-                    .map(
-                      (category) => GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _selectedSuggestion = category;
-                            _searchController.text = category;
-                          });
-                        },
-                        child: Chip(label: Text(category)),
-                      ),
-                    )
+          if (suggestions.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Wrap(
+                children: suggestions
+                    .map((suggestion) => GestureDetector(
+                          onTap: () => _filterList(suggestion),
+                          child: Chip(
+                            label: Text(suggestion),
+                          ),
+                        ))
                     .toList(),
               ),
-            SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _selectedSuggestion == null ? _categories.length : 1,
-                itemBuilder: (context, index) {
-                  final category = _selectedSuggestion == null
-                      ? _categories[index]
-                      : _selectedSuggestion!;
-                  return Card(
-                    margin: EdgeInsets.only(bottom: 12),
-                    child: ListTile(
-                      title: Text(category),
-                      subtitle: Text('${category == 'Adhikrit' ? '113' : category == 'Subba' ? '130' : '123'} Sets'),
-                      trailing: ElevatedButton(
-                        onPressed: () {},
-                        child: Text('View Sets'),
-                      ),
+            ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                // padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: Column(
+                  children: [
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: filteredItems.isEmpty
+                          ? allItems.length
+                          : filteredItems.length,
+                      itemBuilder: (context, index) {
+                        final item = filteredItems.isEmpty
+                            ? allItems[index]
+                            : filteredItems[index];
+                        return Card(
+                          child: ListTile(
+                          title: Text(item),
+                          subtitle: Text('100 Sets'),
+                          trailing: ElevatedButton(
+                            onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ExamScreen()));
+                            },
+                            child: const Text('View Sets'),
+                          ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
+                    const SizedBox(height: 8),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Previous Exams',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Card(
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: const Text('Adhikrit Set 27'),
+                                subtitle: const Text('Completed on Oct 15, 2023'),
+                                trailing: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Text('85%',
+                                        style: TextStyle(
+                                            fontSize: 20, fontWeight: FontWeight.bold)),
+                                    Text('Score'),
+                                  ],
+                                ),
+                              ),
+                           
+                              ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
+                                child: Text('Retake Exam'),
+                              )
+                            ],
+                          ),
+                        ),
+                        Card(
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: const Text('Subba Set 35'),
+                                subtitle: const Text('Completed on Oct 10, 2023'),
+                                trailing: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Text('92%',
+                                        style: TextStyle(
+                                            fontSize: 20, fontWeight: FontWeight.bold)),
+                                    Text('Score'),
+                                  ],
+                                ),
+                              ),
+                               
+                              ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
+                                child: Text('Retake Exam'),
+                              )
+                            ],
+                          ),
+                        ),
+                        Card(
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: const Text('Kharidar Set 57'),
+                                subtitle: const Text('Completed on Oct 5, 2023'),
+                                trailing: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Text('78%',
+                                        style: TextStyle(
+                                            fontSize: 20, fontWeight: FontWeight.bold)),
+                                    Text('Score'),
+                                  ],
+                                ),
+                              ),
+                              
+                              ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
+                                child: Text('Retake Exam'),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
