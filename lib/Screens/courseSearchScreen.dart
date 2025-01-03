@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mock_exam/Courses/courseEnroll.dart';
+import 'package:mock_exam/Courses/coursesList.dart';
 
 class CourseSearchScreen extends StatefulWidget {
   @override
@@ -12,9 +14,9 @@ class _CourseSearchScreenState extends State<CourseSearchScreen> {
   
   // List of courses
   final List<Course> courses = [
-    Course("Loksewa Preparation Course", "Duration: 16 weeks", "Rs 13,999"),
-    Course("IELTS Preparation Course", "Duration: 12 weeks", "Rs 5,999"),
-    Course("TOEFL iBT Course", "Duration: 10 weeks", "Rs2,279"),
+    Course("Loksewa Preparation Courses", "Duration: 16 weeks", "Rs 13,999"),
+    Course("Computer Courses", "Duration: 12 weeks", "Rs 5,999"),
+    Course("Language Courses", "Duration: 10 weeks", "Rs2,279"),
     Course("GRE Advanced Prep", "Duration: 14 weeks", "Rs3,399"),
     Course("GMAT Business Ready", "Duration: 16 weeks", "Rs 4,449"),
     Course("PTE Academic Course", "Duration: 8 weeks", "Rs 2,249"),
@@ -185,15 +187,19 @@ void _onSearchChanged(String query) {
                           Row(
                             children: [
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ComputerCoursesScreen(),));
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.deepPurple,
                                 ),
-                                child: Text("View details"),
+                                child: Text("View Courses"),
                               ),
                               SizedBox(width: 8),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => EnrollmentForm()));
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.deepPurple,
                                 ),
