@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mock_exam/Courses/courseDetail.dart';
 
 
 class ComputerCoursesScreen extends StatefulWidget {
@@ -73,7 +74,25 @@ class _ComputerCoursesScreenState extends State<ComputerCoursesScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Computer Courses'),
+        title: Text(
+          'Computer Courses',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(Icons.home, color: Colors.black),
+          onPressed: () {
+        // Handle home icon press
+          },
+        ),
+        actions: [
+          IconButton(
+        icon: Icon(Icons.notifications, color: Colors.black),
+        onPressed: () {
+          // Handle notification icon press
+        },
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -147,7 +166,9 @@ class _ComputerCoursesScreenState extends State<ComputerCoursesScreen> {
                         Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => CourseDetailsPage()));
+                          },
                           style: ElevatedButton.styleFrom(
                           primary: Colors.deepPurple,
                           minimumSize: Size(double.infinity, 36), // Increase width

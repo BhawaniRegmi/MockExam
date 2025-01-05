@@ -49,7 +49,7 @@ class _EnrollmentFormState extends State<EnrollmentForm> {
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
-        prefixIcon: Icon(icon, color: Colors.teal),
+        prefixIcon: Icon(icon, color: Colors.black),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -116,11 +116,11 @@ class _EnrollmentFormState extends State<EnrollmentForm> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
-                  'Please fill all the information below',
+                  'Please fill all the information below.',
                   style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
-                  color: Colors.teal,
+                  color: Colors.red,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -129,7 +129,7 @@ class _EnrollmentFormState extends State<EnrollmentForm> {
                   controller: _nameController,
                   labelText: 'Name',
                   hintText: 'Enter your full name',
-                  icon: Icons.person,
+                    icon: Icons.person,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your name';
@@ -238,10 +238,10 @@ class _EnrollmentFormState extends State<EnrollmentForm> {
           decoration: InputDecoration(
             labelText: 'Institution Name',
             hintText: 'Search or select your institution',
-            prefixIcon: Icon(Icons.school, color: Colors.teal),
+            prefixIcon: Icon(Icons.school, color: Colors.black),
             suffixIcon: _institutionController.text.isNotEmpty
                 ? IconButton(
-                    icon: const Icon(Icons.clear, color: Colors.teal),
+                    icon: const Icon(Icons.clear, color: Colors.black),
                     onPressed: _clearSearch,
                   )
                 : null,
