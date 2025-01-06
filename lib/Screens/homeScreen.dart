@@ -208,8 +208,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
 
-            //  SizedBox(height: size.height * 0.02),
-            SizedBox(height: 20,),
+            
+            // SizedBox(height: 20,),
+             SizedBox(height: 10,),
     
                 Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -419,7 +420,9 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(course, style: TextStyle(fontSize: size.width * 0.045)),
         subtitle: Text(description, style: TextStyle(fontSize: size.width * 0.035)),
         trailing: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ExamSearchScreen(),));  
+          },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.purple),
           child: Text("Set Reminder", style: TextStyle(fontSize: size.width * 0.035)),
         ),

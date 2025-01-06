@@ -7,19 +7,19 @@ class CourseDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Text(
+        iconTheme: const IconThemeData(color: Colors.black),
+        title: const Text(
           'Course Details',
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.home),
+          icon: const Icon(Icons.home),
           onPressed: () {},
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {},
           ),
         ],
@@ -38,20 +38,20 @@ class CourseDetailsPage extends StatelessWidget {
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Advanced Web Development Masterclass',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Row(
-                    children: [
+                    children: const [
                       Icon(Icons.star, color: Colors.amber, size: 20),
                       SizedBox(width: 4),
                       Text('4.8 (2,345 reviews)'),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -60,8 +60,15 @@ class CourseDetailsPage extends StatelessWidget {
                       InfoCard(label: 'Level', value: 'Advanced'),
                     ],
                   ),
-                  SizedBox(height: 16),
-                  Row(
+                  const SizedBox(height: 10),
+               
+                  ProjectCard(
+                    title: 'Course Description',
+                    description:
+                        'Master modern web development with this comprehensive course. Learn advanced JavaScript, React.js, Node.js, and cloud deployment. Perfect for developers looking to level up their skills and build professional full-stack applications.'),
+                 
+                 const SizedBox(height: 10),
+                    Row(
                     children: [
                       Image.asset(
                         'assets/auth/profile.jpg', // Replace with your image path
@@ -69,10 +76,11 @@ class CourseDetailsPage extends StatelessWidget {
                         width: 60,
                         fit: BoxFit.cover,
                       ),
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                        children: const [
+                          Text("Instructor",style: TextStyle(fontSize: 18,color: Colors.black87, fontWeight: FontWeight.bold),),
                           Text(
                             'Dr. Michael Anderson',
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -82,23 +90,19 @@ class CourseDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     '15+ years of industry experience. Former Tech Lead at Google. PhD in Computer Science from Stanford University.',
                   ),
-                  SizedBox(height: 10),
-                  ProjectCard(
-                    title: 'Course Description',
-                    description:
-                        'Master modern web development with this comprehensive course. Learn advanced JavaScript, React.js, Node.js, and cloud deployment. Perfect for developers looking to level up their skills and build professional full-stack applications.'),
-                  SizedBox(height: 16),
-                  Text(
+                  
+                  const SizedBox(height: 16),
+                  const Text(
                     'What You\'ll Learn',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Column(
-                    children: [
+                    children: const [
                       ListTile(
                         leading: Icon(Icons.check_circle, color: Colors.green),
                         title: Text('Advanced JavaScript concepts and ES6+ features'),
@@ -117,13 +121,13 @@ class CourseDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Course Content',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 8),
-                  ExpansionTile(
+                  const SizedBox(height: 8),
+                  const ExpansionTile(
                     title: Text('Module 1: Introduction to Web Development'),
                     children: [
                       ListTile(
@@ -137,7 +141,7 @@ class CourseDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  ExpansionTile(
+                  const ExpansionTile(
                     title: Text('Module 2: Advanced JavaScript'),
                     children: [
                       ListTile(
@@ -151,7 +155,7 @@ class CourseDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  ExpansionTile(
+                  const ExpansionTile(
                     title: Text('Module 3: React.js'),
                     children: [
                       ListTile(
@@ -165,7 +169,7 @@ class CourseDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  ExpansionTile(
+                  const ExpansionTile(
                     title: Text('Module 4: Backend Development with Node.js'),
                     children: [
                       ListTile(
@@ -179,12 +183,12 @@ class CourseDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Projects',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   ProjectCard(
                     title: 'E-commerce Platform',
                     description:
@@ -195,39 +199,39 @@ class CourseDetailsPage extends StatelessWidget {
                     description:
                         'Create a responsive dashboard with real-time data visualization.',
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Certificate Earned',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Image.asset(
                     'assets/auth/ce.png', // Replace with your actual certificate image path
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Demo Class Video',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
                         Container(
-                          margin: EdgeInsets.all(8.0),
+                          margin: const EdgeInsets.all(8.0),
                           height: 150,
                           width: 120,
                           decoration: BoxDecoration(
-                            image: DecorationImage(
+                            image: const DecorationImage(
                               image: AssetImage('assets/auth/demo.jpeg'), // Replace with your image path
                               fit: BoxFit.cover,
                             ),
                             borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 color: Colors.black26,
                                 blurRadius: 4,
@@ -235,21 +239,21 @@ class CourseDetailsPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Icon(Icons.play_circle_fill, size: 48, color: Colors.blue),
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.all(8.0),
+                          margin: const EdgeInsets.all(8.0),
                           height: 150,
                           width: 120,
                           decoration: BoxDecoration(
-                            image: DecorationImage(
+                            image: const DecorationImage(
                               image: AssetImage('assets/auth/de.png'), // Replace with your image path
                               fit: BoxFit.cover,
                             ),
                             borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 color: Colors.black26,
                                 blurRadius: 4,
@@ -257,21 +261,21 @@ class CourseDetailsPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Icon(Icons.play_circle_fill, size: 48, color: Colors.blue),
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.all(8.0),
+                          margin: const EdgeInsets.all(8.0),
                           height: 150,
                           width: 120,
                           decoration: BoxDecoration(
-                            image: DecorationImage(
+                            image: const DecorationImage(
                               image: AssetImage('assets/auth/dem.jpeg'), // Replace with your image path
                               fit: BoxFit.cover,
                             ),
                             borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
+                            boxShadow: const [
                               BoxShadow(
                                 color: Colors.black26,
                                 blurRadius: 4,
@@ -279,28 +283,28 @@ class CourseDetailsPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Icon(Icons.play_circle_fill, size: 48, color: Colors.blue),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Career Options',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     'Graduates of this course can pursue careers such as Web Developer, Full-stack Developer, Frontend Engineer, Backend Engineer, and Cloud Specialist.',
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Frequently Asked Questions',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   FAQItem(
                     question: 'What is the duration of the course?',
                     answer: 'The course lasts for 12 weeks.',
@@ -313,12 +317,12 @@ class CourseDetailsPage extends StatelessWidget {
                     question: 'Is there a certification upon completion?',
                     answer: 'Yes, a certificate will be provided after successful completion.',
                   ),
-                  SizedBox(height: 16),
-                  Text(
+                  const SizedBox(height: 16),
+                  const Text(
                     'Related Courses',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   RelatedCourseCard(
                     title: 'Introduction to Data Science',
                     description: 'Learn the fundamentals of data science including Python, data analysis, and machine learning.',
@@ -329,7 +333,7 @@ class CourseDetailsPage extends StatelessWidget {
                     description: 'Become a full-stack developer with this intensive bootcamp.',
                     imageUrl: 'assets/auth/ai_ml.jpg', // Replace with your image URL
                   ),
-                  SizedBox(height: 65),
+                  const SizedBox(height: 65),
                 ],
               ),
             ),
@@ -339,13 +343,13 @@ class CourseDetailsPage extends StatelessWidget {
             left: 0,
             right: 0,
             child: Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               color: Colors.white,
               child: Row(
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       Text(
                         'RS12,999',
                         style: TextStyle(
@@ -356,7 +360,7 @@ class CourseDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
@@ -364,21 +368,21 @@ class CourseDetailsPage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.deepPurple,
-                        minimumSize: Size(double.infinity, 48), // Extend button width to screen width
+                        minimumSize: const Size(double.infinity, 48), // Extend button width to screen width
                       ),
-                      child: Text('Enroll Now', style: TextStyle(fontSize: 18)),
+                      child: const Text('Enroll Now', style: TextStyle(fontSize: 18)),
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => CourseInquiryForm()));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
-                      minimumSize: Size(48, 48), // Set button width to 48
+                      minimumSize: const Size(48, 48), // Set button width to 48
                     ),
-                    child: Text('Inquiry', style: TextStyle(color: Colors.white)),
+                    child: const Text('Inquiry', style: TextStyle(color: Colors.white)),
                   ),
                 ],
               ),
@@ -400,8 +404,8 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(label, style: TextStyle(fontWeight: FontWeight.bold)),
-        SizedBox(height: 4),
+        Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 4),
         Text(value),
       ],
     );
@@ -422,8 +426,8 @@ class ProjectCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
+            Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
             Text(description),
           ],
         ),
@@ -445,8 +449,8 @@ class FAQItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(question, style: TextStyle(fontWeight: FontWeight.bold)),
-          SizedBox(height: 4),
+          Text(question, style: const TextStyle(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 4),
           Text(answer),
         ],
       ),
@@ -482,17 +486,17 @@ class RelatedCourseCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
-                SizedBox(height: 4),
+                Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 4),
                 Text(description),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     primary: Colors.deepPurple,
-                    minimumSize: Size(double.infinity, 36), // Extend button width to screen width
+                    minimumSize: const Size(double.infinity, 36), // Extend button width to screen width
                   ),
-                  child: Text('Learn More'),
+                  child: const Text('Learn More'),
                 ),
               ],
             ),
