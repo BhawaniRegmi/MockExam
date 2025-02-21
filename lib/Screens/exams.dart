@@ -375,7 +375,7 @@ class _ExamSearchScreenState extends State<ExamSearchScreen> {
           child: Text(
             suggestions[index],
             style: const TextStyle(color: Colors.black),
-          ),
+          ), 
         ),
       ),
     );
